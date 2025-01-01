@@ -18,6 +18,12 @@ Route::get('/listings/create', [ListingController::class, 'create']);
 //store
 Route::post('/listings', [ListingController::class,'store']);
 
+//shpw edit form
 
+Route::get('/listings/{listing}/edit', ListingController::class, 'edit');
 Route::get('/listings/{listing}', [ListingController::class,'show']);
+
+
+
+
 

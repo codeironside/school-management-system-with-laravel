@@ -10,9 +10,12 @@ class ListingController extends Controller
 {
 //shpw all listings
     public function index(){
-    $tags =request()->tag;
+    // return view('listings.index',[
+    //     'listings'=>listing::latest()->filter(request(['tag','search']))->paginate(2),
+    //     // 'listings'=>listing::all()
+    // ]);
     return view('listings.index',[
-        'listings'=>listing::latest()->filter(request(['tag','search']))->get(),
+        'listings'=>listing::latest()->filter(request(['tag','search']))->simplePaginate(6),
         // 'listings'=>listing::all()
     ]);
     }
@@ -39,11 +42,21 @@ class ListingController extends Controller
             'tags'=>'required',
             'description'=>'required'
         ]);
-
+if($request->hasFile('logo')){
+    $formFields['logo']=$request->file(key:'logo')->store('logos','public');
+}
         listing::create($formFields);
+       
 
-        return redirect('/');
+        return redirect('/')->with('message','listing created successfully');
 
+
+    }
+    //show edit form
+
+    public function edit(Listing $listing)
+    {
+        return view('listings.edit', ['listing'=>$listing]);
     }
 
 }
