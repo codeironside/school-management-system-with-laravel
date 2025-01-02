@@ -46,6 +46,24 @@ Route::get('/listings/{listing}', [ListingController::class,'show']);
 Route::get('/register',[UserController::class, 'create']);
 
 
+//create new user
+
+Route::post('/users', [UserController::class, 'store'])
+;
+
+
+
+//log user out
+
+Route::post('/logout', [UserController::class, 'logout']);
+
+
+
+//show login form
+
+Route::get('/login', [UsercController::class, 'login']);
+
+
 
 
 
