@@ -1,8 +1,9 @@
 <?php
 
-use App\Http\Controllers\ListingController;
 use App\Models\Listing;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 use App\Http\Controllers\ProfileController;
 //create form to store new listing
 //show to show one index
@@ -30,8 +31,19 @@ Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
 
 //update listing
 Route::put('/listings/{listing}/edit', [ListingController::class, 'update']);
+
+
+//delete item
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
+
+
+
 Route::get('/listings/{listing}', [ListingController::class,'show']);
 
+
+//show REgister/create user
+
+Route::get('/register',[UserController::class, 'create']);
 
 
 
