@@ -68,6 +68,10 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 Route::post('/users/authenticate', [Usercontroller::class, 'authenticate']);
 
+//manage Listings
+
+Route
+
 
 
 
