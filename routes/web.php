@@ -14,35 +14,38 @@ use App\Http\Controllers\ProfileController;
 //update - update item
 //destroy- delete item 
 
+Route::get('/listings/manage', [ListingController::class, 'manage'])->middleware('auth');
 
-
-Route::get('/',[ListingController::class ,'index']);
+Route::get('/', [ListingController::class, 'index']);
 
 
 //show ceate form
 Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
 
 //store
-Route::post('/listings', [ListingController::class,'store'])->middleware('auth');
+Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
 
 //shpw edit form
-Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');;
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
+;
 
 //update listing
-Route::put('/listings/{listing}/edit', [ListingController::class, 'update'])->middleware('auth');;
+Route::put('/listings/{listing}/edit', [ListingController::class, 'update'])->middleware('auth');
+;
 
 
 //delete item
-Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');;
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');
+;
 
 
-
-Route::get('/listings/{listing}', [ListingController::class,'show']);
+//show one listing
+Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 
 //show REgister/create user
 
-Route::get('/register',[UserController::class, 'create'])->middleware('guest');
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
 
 
 //create new user
@@ -54,7 +57,8 @@ Route::post('/users', [UserController::class, 'store'])
 
 //log user out
 
-Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');;
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+;
 
 
 
@@ -70,7 +74,7 @@ Route::post('/users/authenticate', [Usercontroller::class, 'authenticate']);
 
 //manage Listings
 
-Route
+
 
 
 

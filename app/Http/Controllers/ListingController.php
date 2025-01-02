@@ -52,9 +52,9 @@ class ListingController extends Controller
         }
 
 
-        $formFields['user_id']=auth()->id();
+        $formFields['user_id'] = auth()->id();
         listing::create($formFields);
-        
+
 
 
         return redirect('/')->with('message', 'listing created successfully');
@@ -70,6 +70,11 @@ class ListingController extends Controller
     //updatelisting data
     public function update(Request $request, Listing $listing)
     {
+
+        //make sure logged in user is owner
+        if($listing->user_id!==auth()->id()){
+            abort(403, 'Unauthorized action');
+        }
         $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required'],
@@ -93,9 +98,16 @@ class ListingController extends Controller
 
     public function destroy(Listing $listing)
     {
-
+        if ($listing->user_id !== auth()->id()) {
+            abort(403, 'Unauthorized action');
+        }
         $listing->delete();
         return redirect('/')->with('message', 'Listing deleted successfully');
+    }
+
+    public function manage()
+    {
+        return view('listings.manage', ['listings' => auth()->user()->listing()->get()]);
     }
 
 }
